@@ -1,8 +1,55 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+typedef struct Ficha{
+    int info;
+    struct Ficha *prox;
+}No;
+
+No *inicio, *fim, *aux, *novo;
+
+void criar(){
+    inicio=fim=NULL;
+}
+
+void insereinicio(){
+    int valor;
+    printf("Digite o valor: ");
+    scanf("%d",&valor);
+
+    novo = (No*)malloc(sizeof(No));
+    novo -> info=valor;
+    if(inicio==NULL){
+        inicio=fim=novo;
+        novo->prox=NULL;
+    }else{
+        novo->prox=inicio;
+        inicio=novo;
+    }
+}
+
+void RemoveInicio(){
+    if(inicio!=NULL){
+        if(inicio == fim){
+            printf("Eliminando=%d\n",inicio -> info);
+            free(inicio);
+            inicio = fim = NULL;
+        }
+        else{
+            aux = inicio;
+            inicio = aux -> prox;
+            printf("Eliminando=%d\n",aux -> info);
+            free (aux);
+        }
+    }
+    else{
+        printf("lista vazia\n");
+    }
+}
+
 
 int main() {
+    criar();
     int op;
     printf("\n------------------------------------------");
     printf("\n- 1 inserir                    -");
