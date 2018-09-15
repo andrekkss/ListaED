@@ -118,6 +118,34 @@ void removeMeio(){
         printf("Valor não encontrado!");
 }
 
+void inserefim(){
+    int valor;
+    printf("Digite o valor: ");
+    scanf("%d",&valor);
+
+    novo = (No*)malloc(sizeof(No));
+    novo -> info=valor;
+    if(inicio==NULL){
+        inicio=fim=novo;
+        novo->prox=NULL;
+    }else{
+        fim->prox=novo;
+        novo->prox=NULL;
+        fim=novo;
+    }
+}
+
+void RemoveFim(){
+    aux=inicio;
+    while(aux->prox!=fim){
+        aux=aux->prox;
+    }
+    printf("Eliminando = %d ", fim->info);
+    free(fim);
+    aux->prox=NULL;
+    fim=aux;
+}
+
 int main() {
     criar();
     int op;
