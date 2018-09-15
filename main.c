@@ -7,7 +7,7 @@ typedef struct Ficha{
     struct Ficha *prox;
 }No;
 
-No *inicio, *fim, *aux, *novo;
+No *inicio, *fim, *aux, *aux2, *novo;
 
 void criar(){
     inicio=fim=NULL;
@@ -22,26 +22,25 @@ void insereinicio(){
     novo -> info=valor;
     if(inicio==NULL){
         inicio=fim=novo;
+        fim > inicio;
         novo->prox=NULL;
     }else{
         novo->prox=inicio;
         inicio=novo;
+        fim=inicio;
     }
 }
 
 void RemoveInicio(){
     if(inicio!=NULL){
-        if(inicio == fim){
-            printf("Eliminando=%d\n",inicio -> info);
-            free(inicio);
-            inicio = fim = NULL;
-        }
-        else{
             aux = inicio;
+            aux2 = fim;
             inicio = aux -> prox;
-            printf("Eliminando=%d\n",aux -> info);
-            free (aux);
-        }
+            fim = aux2 -> prox;
+            printf("Eliminando inicio=%d\n",aux -> info);
+            printf("Eliminando fim=%d\n",aux2 -> info);
+            free(aux);
+            free(aux2);
     }
     else{
         printf("lista vazia\n");
@@ -119,40 +118,16 @@ void removeMeio(){
         printf("Valor não encontrado!");
 }
 
-void inserefim(){
-    int valor;
-    printf("Digite o valor: ");
-    scanf("%d",&valor);
-
-    novo = (No*)malloc(sizeof(No));
-    novo -> info=valor;
-    if(inicio==NULL){
-        inicio=fim=novo;
-        novo->prox=NULL;
-    }else{
-        fim->prox=novo;
-        novo->prox=NULL;
-        fim=novo;
-    }
-}
-
-void RemoveFim(){
-    aux=inicio;
-    while(aux->prox!=fim){
-        aux=aux->prox;
-    }
-    printf("Eliminando = %d ", fim->info);
-    free(fim);
-    aux->prox=NULL;
-    fim=aux;
-}
-
 void imprime(){
     aux = inicio;
-
+    aux2 = fim;
     while(aux != NULL){
-        printf("%d\n",aux -> info);
+        printf("inicio: %d\n",aux -> info);
         aux = aux -> prox;
+    }
+    while(aux2 != NULL){
+        printf("fim: %d\n",aux2 -> info);
+        aux2 = aux2 -> prox;
     }
     getch();
 }
@@ -160,15 +135,13 @@ void imprime(){
 int main() {
     criar();
     int op;
-    printf("\n------------------------------------------");
+    printf("\n--------------------------------");
     printf("\n- 1 inserir                    -");
-    printf("\n- 2 inserir fim                -");
-    printf("\n- 3 imprimir                   -");
-    printf("\n- 4 remover inicio             -");
-    printf("\n- 5 remover fim                -");
-    printf("\n- 6 inserir meio               -");
-    printf("\n- 7 remover meio               -");
-    printf("\n- 8 sair                       -");
+    printf("\n- 2 imprimir                   -");
+    printf("\n- 3 remover                    -");
+    printf("\n- 4 inserir meio               -");
+    printf("\n- 5 remover meio               -");
+    printf("\n- 6 sair                       -");
     printf("\n--------------------------------");
 
     while(op!=4){
@@ -182,24 +155,18 @@ int main() {
                 insereinicio();
                 break;
             case 2 :
-                inserefim();
-                break;
-            case 3 :
                 imprime();
                 break;
-            case 4 :
+            case 3 :
                 RemoveInicio();
                 break;
-            case 5 :
-                RemoveFim();
-                break;
-            case 6 :
+            case 4 :
                 inserirMeio();
                 break;
-            case 7 :
+            case 5 :
                 removeMeio();
                 break;
-            case 8 :
+            case 6 :
                 system("EXIT");
                 break;
             default :
