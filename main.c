@@ -22,6 +22,7 @@ void insereinicio(){
     novo = (No*)malloc(sizeof(No));
     novo -> info=valor;
     if(inicio==NULL){
+        inicio = fim = novo;
         novo -> prox = NULL;
         novo -> ant = NULL;
         fim > novo;
