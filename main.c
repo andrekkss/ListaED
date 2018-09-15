@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <conio.h>
 
 typedef struct Ficha{
     int info;
@@ -144,6 +145,16 @@ void RemoveFim(){
     free(fim);
     aux->prox=NULL;
     fim=aux;
+}
+
+void imprime(){
+    aux = inicio;
+
+    while(aux != NULL){
+        printf("%d\n",aux -> info);
+        aux = aux -> prox;
+    }
+    getch();
 }
 
 int main() {
