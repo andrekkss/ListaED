@@ -48,6 +48,76 @@ void RemoveInicio(){
 }
 
 
+void inserirMeio(){
+    int valor, ref,flag = 0;
+
+    printf("Digite a referência:   ");
+    scanf("%d",&ref);
+
+    aux = inicio;
+
+    while (aux->info!=ref && aux!=NULL){
+        aux = aux->prox;
+    }
+    if(aux->info==ref){
+        flag = 1;
+
+        if(flag == 1){
+            printf("Digite um valor:");
+            scanf("%d",&valor);
+            novo = (No*)malloc(sizeof(No));
+            novo->info=valor;
+
+            novo->prox = aux->prox;
+            aux->prox = novo;
+
+            int aux1;
+
+            printf("Deseja inserir depois ou antes da referência : %d ?\n\n 1- Antes   2- Depois",&ref);
+            scanf("%d",&aux1);
+            do{
+                if(aux1 == 1){
+
+                    int controle;
+                    controle=aux->info;
+                    aux->info=novo->info ;
+                    novo->info = controle;
+                    printf("Ficha inserida!\n\n");
+                    getch();
+                }else if(aux1 == 2){
+                    printf("Ficha inserida!\n\n");
+                    getch();
+                }
+            }while(ref != 1 && ref != 2);
+        }else{
+            printf("Elemento não encontrado");
+        }
+    }
+}
+
+void removeMeio(){
+    int ref,flag = 0;
+    No *aux2;
+    printf("Digite o valor a ser eliminado");
+    scanf("%d",&ref);
+    aux = inicio;
+    while(aux->info !=ref && aux!=fim)
+        aux = aux->prox;
+    if(aux->info==ref)
+        flag=1;
+    if(flag==1){
+        aux2=aux->prox;
+        printf("Eliminando = %d",aux->info);
+        aux->info = aux2->info;
+        printf("passei 1");
+        aux->prox = aux2->prox;
+        printf("passei 2");
+        free(aux2);
+        printf("passei free");
+    }else
+        printf("Valor não encontrado!");
+}
+
 int main() {
     criar();
     int op;
